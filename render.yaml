@@ -8,20 +8,10 @@ services:
     buildCommand: |
       python -m pip install --upgrade pip setuptools wheel
       python -m pip install --prefer-binary -r requirements.txt
-      # optional training step if you have ml/run_train_from_json.py
-      if [ -f ml/run_train_from_json.py ]; then python ml/run_train_from_json.py; fi
-    startCommand: gunicorn -k uvicorn.workers.UvicornWorker app:app --bind 0.0.0.0:$PORT
+      python ml/run_train_from_json.py
+      python -m pip install -r requirements.txt
+    startCommand: gunicorn -k uvicorn.workers.UvicornWorker main:app --chdir backend --bind 0.0.0.0:$PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHONUNBUFFERED
         value: "1"
-
-staticSites:
-  - name: careerpath-frontend
-    branch: develop
-    buildCommand: |
-      npm --prefix frontend ci
-      npm --prefix frontend run build
-    publishPath: frontend/dist
-    plan: free
-    region: oregon
