@@ -1,0 +1,12 @@
+[
+  {
+    "role": "Data Scientist",
+    "skills": ["python", "statistics", "machine_learning", "sql", "pandas"],
+    "resources": ["Coursera ML", "Kaggle DS"]
+  },
+  {
+    "role": "Backend Developer",
+    "skills": ["python", "fastapi", "flask", "api", "sql"],
+    "resources": ["FastAPI Docs", "Flask Mega Tutorial"]
+  }
+]
