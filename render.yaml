@@ -6,9 +6,8 @@ services:
     region: oregon
     branch: develop
     buildCommand: |
+      apt-get update && apt-get install -y build-essential python3-dev gfortran libatlas-base-dev
       python -m pip install --upgrade pip setuptools wheel
-      python -m pip install --prefer-binary -r requirements.txt
-      python ml/run_train_from_json.py
       python -m pip install -r requirements.txt
     startCommand: gunicorn -k uvicorn.workers.UvicornWorker main:app --chdir backend --bind 0.0.0.0:$PORT
     healthCheckPath: /health
