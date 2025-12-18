@@ -1,16 +1,7 @@
 services:
   - type: web
-    name: careerpath-backend
+    name: my-fastapi-app
     env: python
     plan: free
-    region: oregon
-    branch: develop
-    buildCommand: |
-      apt-get update && apt-get install -y build-essential python3-dev gfortran libatlas-base-dev
-      python -m pip install --upgrade pip setuptools wheel
-      python -m pip install -r requirements.txt
-    startCommand: gunicorn -k uvicorn.workers.UvicornWorker main:app --chdir backend --bind 0.0.0.0:$PORT
-    healthCheckPath: /health
-    envVars:
-      - key: PYTHONUNBUFFERED
-        value: "1"
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+    startCommand: gunicorn app:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --workers 1
