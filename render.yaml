@@ -6,8 +6,8 @@ services:
     region: oregon
     branch: develop
     buildCommand: |
-      python -m pip install --upgrade pip
-      pip install -r requirements.txt
+      python -m pip install --upgrade pip setuptools wheel
+      python -m pip install --prefer-binary -r requirements.txt
       python ml/run_train_from_json.py
     startCommand: gunicorn -k uvicorn.workers.UvicornWorker main:app --chdir backend --bind 0.0.0.0:$PORT
     healthCheckPath: /health
