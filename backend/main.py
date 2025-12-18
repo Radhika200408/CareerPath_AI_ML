@@ -4,6 +4,11 @@ from ml.recommender import recommend_careers
 
 app = FastAPI(title="CareerPath AI")
 
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 @app.post("/upload-dataset")
 def upload_dataset(file: UploadFile = File(...)):
     path = f"data/{file.filename}"
