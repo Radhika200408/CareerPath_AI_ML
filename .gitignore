@@ -25,11 +25,16 @@ dist/
 .DS_Store
 Thumbs.db
 
+
 # Models and generated data
 # Keep source JSON (data/careers.json) under version control, ignore generated files
 data/*.csv
 data/*.pkl
 data/*.pickle
+
+# DO NOT ignore model files needed for deployment
+!models/
+!models/*.pkl
 
 # Frontend
 frontend/
