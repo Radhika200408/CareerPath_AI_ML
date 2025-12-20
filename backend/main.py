@@ -52,11 +52,15 @@ async def upload_dataset(request: Request, file: UploadFile = File(None)):
         )
     return {"message": "Model trained", "records": records}
 
+import os
+
 @app.post("/recommend")
 def recommend(data: dict):
     skills = data.get("skills")
     if not skills:
         return {"error": "Missing required key: 'skills'"}, 400
+    if not os.path.exists("models/vectorizer.pkl"):
+        return {"error": "Model file 'models/vectorizer.pkl' not found. Please upload dataset or train the model first."}, 500
     try:
         return recommend_careers(skills).to_dict(orient="records")
     except Exception as e:
