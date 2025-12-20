@@ -54,5 +54,11 @@ async def upload_dataset(request: Request, file: UploadFile = File(None)):
 
 @app.post("/recommend")
 def recommend(data: dict):
-    return recommend_careers(data["skills"]).to_dict(orient="records")
+    skills = data.get("skills")
+    if not skills:
+        return {"error": "Missing required key: 'skills'"}, 400
+    try:
+        return recommend_careers(skills).to_dict(orient="records")
+    except Exception as e:
+        return {"error": f"Failed to generate recommendations: {str(e)}"}, 500
 
