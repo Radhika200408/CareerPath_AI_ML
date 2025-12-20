@@ -27,7 +27,6 @@ Thumbs.db
 
 # Models and generated data
 # Keep source JSON (data/careers.json) under version control, ignore generated files
-models/
 data/*.csv
 data/*.pkl
 data/*.pickle
