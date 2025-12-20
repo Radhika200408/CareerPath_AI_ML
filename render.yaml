@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: careerpath-ai-ml-backend
+    env: python
+    pythonVersion: 3.10
+    plan: free
+    buildCommand: python -m pip install --upgrade pip setuptools wheel && python -m pip install -r requirements.txt
+    startCommand: python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+    # No need to set PORT; Render injects it automatically
+    region: oregon
